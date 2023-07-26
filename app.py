@@ -12,11 +12,9 @@ def create_group_deposit_file(deposits):
         return
 
     # Check if 'AMOUNT' key exists in each dictionary
-    elif any("AMOUNT" not in deposit for deposit in deposits):
+    if any("AMOUNT" not in deposit for deposit in deposits):
         print("Invalid data format in the Excel file. 'AMOUNT' column is missing.")
         return
-    else:
-        print("Unhandled Error")
     # Calculate the sums for the first line
     num_deposits = str(len(deposits)).zfill(10)
     total_amount = str(int(sum(float(deposit.get("AMOUNT", 0)) for deposit in deposits))).zfill(15)
