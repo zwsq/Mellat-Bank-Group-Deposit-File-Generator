@@ -1,3 +1,24 @@
+import subprocess
+import sys
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+try:
+    import pandas
+except:
+    install("pandas")
+
+try:
+    import persiantools
+except:
+    install("persiantools")
+
+try:
+    import openpyxl
+except:
+    install("openpyxl")
+
 import pandas as pd
 from persiantools.jdatetime import JalaliDate
 
@@ -59,7 +80,7 @@ if __name__ == "__main__":
         exit(1)
 
     # Fill missing values (NaN) with empty strings
-    df.fillna("", inplace=True)
+    df.astype(str).fillna("", inplace=True)
 
     # Replace Persian character '\u06cc' (ی) with its Unicode equivalent '\u064a' (ی) because Windows 1296 does not support '\u06cc'
     df.replace('\u06cc', '\u064a', regex=True, inplace=True)
