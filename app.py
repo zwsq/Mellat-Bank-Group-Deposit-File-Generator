@@ -80,7 +80,9 @@ if __name__ == "__main__":
         exit(1)
 
     # Fill missing values (NaN) with empty strings
-    df.astype(str).fillna("", inplace=True)
+    df = df.astype(str)
+    df.fillna('', inplace=True)
+    df.replace("nan", "", inplace=True)
 
     # Replace Persian character '\u06cc' (ی) with its Unicode equivalent '\u064a' (ی) because Windows 1296 does not support '\u06cc'
     df.replace('\u06cc', '\u064a', regex=True, inplace=True)
